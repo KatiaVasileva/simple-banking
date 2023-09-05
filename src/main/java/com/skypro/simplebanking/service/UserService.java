@@ -53,10 +53,12 @@ public class UserService implements UserDetailsService {
     accountService.createDefaultAccounts(user);
     return UserDTO.from(user);
   }
+
   @Transactional(readOnly = true)
   public UserDTO getUser(long id) {
     return userRepository.findById(id).map(UserDTO::from).orElseThrow();
   }
+
   @Transactional(readOnly = true)
   public List<ListUserDTO> listUsers() {
     return userRepository.findAll().stream().map(ListUserDTO::from).collect(Collectors.toList());
